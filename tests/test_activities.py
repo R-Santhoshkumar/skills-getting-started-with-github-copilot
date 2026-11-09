@@ -29,6 +29,13 @@ def test_get_activities_returns_activity_details(client):
     ]
 
 
+def test_root_redirects_to_frontend(client):
+    response = client.get("/", follow_redirects=False)
+
+    assert response.status_code == 307
+    assert response.headers["location"] == "/static/index.html"
+
+
 def test_signup_adds_participant(client):
     email = "student@mergington.edu"
 
